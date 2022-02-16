@@ -7,13 +7,9 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { Pressable } from "react-native";
+import ContentScreen from "../screens/ContentScreen"
 
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
-import ContentScreen from "../screens/ContentScreen";
 import MaterialScreen from "../screens/MaterialScreen"
-import NotFoundScreen from "../screens/NotFoundScreen";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -67,7 +63,7 @@ function BottomTabNavigator() {
         component={TabOneScreen}
         options={({ navigation }) => ({
           title: "HOME",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color}/>
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color}/>
         })}
       />
       <BottomTab.Screen
@@ -75,7 +71,7 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: "DISCIPLINAS",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="bookmark" color={color} />,
         }}
       />
     </BottomTab.Navigator>

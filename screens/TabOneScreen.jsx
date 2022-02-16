@@ -7,7 +7,6 @@ import BoxContent from "../components/ButtonBoxContent";
 
 import data from "../database/data.json";
 
-import Marker from "../components/Marker";
 import Search from "../components/Search";
 
 var _width = Dimensions.get("screen").width
@@ -19,8 +18,9 @@ export default function TabOneScreen({ navigation }) {
   }, [Dimensions.get("screen").width]);
 
   var render = Object.keys(data.Disciplinas).map((a) =>
-    Object.keys(data.Disciplinas[a]).map((b) => (
+    Object.keys(data.Disciplinas[a]).map((b, c) => (
       <BoxContent
+        key = {c}
         color="#282A36"
         title={b}
         subtitle={a}
@@ -49,7 +49,7 @@ export default function TabOneScreen({ navigation }) {
           />
           <View style={styles.marker}>
             <View><Text style={styles.markerText}>DISCIPLINAS</Text></View>
-            <View style={styles.markerSelecter}><Text style={styles.markerSelecterText}>SEMESTE I</Text></View>
+            <View style={styles.markerSelecter}><Text style={styles.markerSelecterText}>SEMESTRE I</Text></View>
         </View>
         {render}
         </View>

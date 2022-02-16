@@ -1,7 +1,27 @@
 {
   "Disciplinas": {
     "Semestre I": {
-      "Mecânica dos Solos": {},
+      "Mecânica dos Solos": {
+        "O que é mecânica dos solos?":{
+          "Title": "Mecânica dos solos",
+          "Subtitle": "Como são e como se comportão os solos?",
+          "Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus malesuada gravida. Fusce id commodo risus. Aliquam tincidunt molestie vulputate.",
+          "Image": "../database/images/material.jpg",
+          "Video": "https://www.youtube.com/embed/9GXoxz6_zA0",
+          "List": ["Rodrigo", "Silva", "Coelho"],
+          "Link": {"Youtube": "https://www.youtube.com/"},
+          "PDF": "DDDDDDD"
+        },
+        "Fórmulas":{
+          
+        },
+        "Como usar as fórmulas":{
+          
+        },
+        "Tabelas e gráficos":{
+          
+        }
+      },
       "Desenho Técnico": {},
       "Introdução ao Curso e a Ética Profissional (ICEP)": {}
     },
@@ -11,18 +31,8 @@
       "Desenho Arquitetônico I": {},
       "Canteiro de Obras": {},
       "Higiene e Segurança no Trabalho": {},
-      "Materiais de Construção": {
-        "Sobre Materiais de Construção": {
-          "Title": "O que aborda",
-          "Body 01": "A disciplina de “Materiais de construção” é a responsável por trazer aos alunos o conhecimento sobre os materiais utilizados na obra, seja na locação e infraestrutura ou até mesmo na fase de acabamento.",
-          "Body 02": "Poderão ser introduzidos/aprofundados tópicos como:",
-          "List": ["Agregados;", "Aglomerados;", "Argamassa;", "Concreto;", "Aditivos;", "Materiais Cerâmicos;", "Madeira;", "Metais;", "Vidros;", "Tintas."],
-          "Image": "../database/images/material.jpg",
-          "Link 01": {"Stackoverflow": "https://stackoverflow.com/questions/30540252/how-does-one-display-a-hyperlink-in-react-native-app"},
-          "Link 02": {"Stackoverflow": "https://stackoverflow.com/questions/30540252/how-does-one-display-a-hyperlink-in-react-native-app"}
-        }
-      }
-    },
+      "Materiais de Construção": {}
+},
     "Semestre III": {
       "Projeto Elétrico I": {},
       "Projeto Hidrosanitário I": {},

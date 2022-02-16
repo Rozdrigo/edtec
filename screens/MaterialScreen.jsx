@@ -1,8 +1,7 @@
 import React, {useEffect} from "react";
 import { ScrollView, StyleSheet, Text, Linking, View, Dimensions, Image, Pressable } from "react-native";
 import data from "../database/data.json";
-import { WebView } from 'react-native-webview';
-
+import Icon from "react-native-vector-icons/Ionicons";
 var _width = Dimensions.get("screen").width
 
 export default function ModalScreen({ navigation, route }) {
@@ -41,12 +40,22 @@ export default function ModalScreen({ navigation, route }) {
         </Pressable>
       case "Video":
         return (
-          <WebView
-          style={{height: 200, width: _width-40}}
-          originWhitelist={['*']}
-          userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36 Edg/94.0.992.31"
-            source = {{html: `<iframe width="100%" height="100%" src="${content[a]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`}}
-          />
+          <Pressable style={styles.video} onPress={
+            async ()=>{
+              await Linking.openURL(content[a])
+            }
+          }>
+            <View style={styles.CiclePlay}>
+              <Icon size={75} color="#FEBD00" name="play-circle"/>
+            </View>
+            <Image
+              style={{height: 200, width: _width-40 }}
+              source={{uri: `https://i.ytimg.com/vi/${content[a].slice(30)}/hqdefault.jpg`}}
+            />
+            <View style={styles.boxVideoText}>
+              <Text style={styles.videoText}><Icon size={16} color="#FEBD00" name="logo-youtube"/> Youtube</Text>
+            </View>
+          </Pressable>
         );
       case "List":
         return (
@@ -55,20 +64,14 @@ export default function ModalScreen({ navigation, route }) {
           })
         );
       case "Image":
-        console.log(typeof(content[a]))
         return (
-          <Image 
-                style={{
-                  width: _width - 40,
-                  height: 200,
-                  backgroundColor: "red"
-              }}
-            source={require("../database/images/material.jpg")}
+          <Image
+            style={{height: 100, width: _width-40 }}
           />
         );
       case "PDF":
         return (
-          <></>
+          <></> 
         );
       default:
         return;
@@ -90,23 +93,44 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 14,
-    fontSize: 40,
+    fontSize: 36,
     color: "#282A36",
     textTransform: "uppercase",
-    fontFamily: ""
+  },
+  videoText: {
+    fontSize: 16,
+    color: "#FEBD00",
+    fontWeight: "bold"
   },
   subtitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#5B5B5B",
+    fontSize: 16,
+    color: "#333",
     textTransform: "uppercase"
   },
   TextContent: {
     padding: 20
   },
+  boxVideoText: {
+    position: "absolute",
+    left: 20,
+    bottom: 0,
+    backgroundColor: "#333",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderTopEndRadius: 3,
+    borderTopStartRadius: 3
+  },
   body: {
     textAlign: "justify",
     fontSize: 15
+  },
+  video: {
+    marginVertical: 10,
+    alignItems: "center",
+    borderRadius: 10,
+    overflow: "hidden",
+    borderWidth: 2,
+    borderColor: "#333"
   },
   li: {
     fontWeight: "bold",
@@ -115,6 +139,18 @@ const styles = StyleSheet.create({
   ul: {
     fontSize: 15,
     margin: 2
+  },
+  CiclePlay: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 80,
+    paddingLeft: 5,
+    width: 80,
+    top: 60,
+    zIndex: 20,
+    position: "absolute",
+    backgroundColor: "white",
+    borderRadius: 100
   },
   a: {
     alignSelf: 'flex-start',
