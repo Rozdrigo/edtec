@@ -1,6 +1,10 @@
 {
   "expo": { 
     "name": "EDTEC",
+      "plugins": [
+        "@config-plugins/react-native-blob-util",
+        "@config-plugins/react-native-pdf"
+      ],
     "slug": "EDTEC",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -26,7 +30,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.br.edtec.www"
+      "package": "br.com.edtec.www"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

@@ -8,7 +8,9 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import ContentScreen from "../screens/ContentScreen"
+import OptionsQuizzScreen from "../screens/OptionsQuizzScreen";
 
+import Pdf from "../screens/PdfScreen"
 import MaterialScreen from "../screens/MaterialScreen"
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
@@ -38,6 +40,7 @@ function RootNavigator() {
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Conteúdos" component={ContentScreen} options={{ headerStyle: {backgroundColor: "#FEBD00" }}} />
         <Stack.Screen name="Material" component={MaterialScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="OptionQuizz" component={OptionsQuizzScreen} options={{ headerTintColor: "white", headerStyle: {backgroundColor: "#282A36" }}}/>
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -71,6 +74,14 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: "DISCIPLINAS",
+          tabBarIcon: ({ color }) => <TabBarIcon name="bookmark" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="PDF"
+        component={Pdf}
+        options={{
+          title: "PDF",
           tabBarIcon: ({ color }) => <TabBarIcon name="bookmark" color={color} />,
         }}
       />

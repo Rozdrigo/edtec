@@ -6,10 +6,8 @@
           "Title": "Mecânica dos solos",
           "Subtitle": "Como são e como se comportão os solos?",
           "Body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempus malesuada gravida. Fusce id commodo risus. Aliquam tincidunt molestie vulputate.",
-          "Image": "../database/images/material.jpg",
-          "Video": "https://www.youtube.com/embed/9GXoxz6_zA0",
           "List": ["Rodrigo", "Silva", "Coelho"],
-          "Link": {"Youtube": "https://www.youtube.com/"},
+          "Link": {"Homepage do youtube": "https://www.youtube.com/"},
           "PDF": "DDDDDDD"
         },
         "Fórmulas":{

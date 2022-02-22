@@ -2,11 +2,14 @@ import React, {useEffect} from "react";
 import { ScrollView, StyleSheet, Text, Linking, View, Dimensions, Image, Pressable } from "react-native";
 import data from "../database/data.json";
 import Icon from "react-native-vector-icons/Ionicons";
+import IconAnt from "react-native-vector-icons/AntDesign";
+import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
+
+import WebView from "react-native-webview";
 var _width = Dimensions.get("screen").width
 
 export default function ModalScreen({ navigation, route }) {
   const { title, subtitle, module, subModule } = route.params;
-  
   useEffect(() => {
     _width = Dimensions.get("screen").width
   }, [Dimensions.get("screen").width])
@@ -16,36 +19,36 @@ export default function ModalScreen({ navigation, route }) {
     switch (a.split(" ")[0]) {
       case "Title":
         return (
-          <Text style={styles.title}>
+          <Text key={content[a] + Math.random()} style={styles.title}>
             {content[a]}
           </Text>
         );
       case "Subtitle":
         return (
-          <Text style={styles.subtitle}>
+          <Text key={content[a] + Math.random()} style={styles.subtitle}>
             {content[a]}
           </Text>
         );
       case "Body":
         return (
-          <Text style={styles.body}>
+          <Text key={content[a] + Math.random()} style={styles.body}>
             {content[a]}
             {"\n"}
           </Text>
         );
       case "Link":
         var ref = Object.keys(content[a])[0]
-        return <Pressable style={styles.a} onPress={async () => await Linking.openURL(content[a][ref])}>
-         <Text styles={styles.aText}>{ref}</Text>
+        return <Pressable key={content[a] + Math.random()} style={styles.a} onPress={async () => await Linking.openURL(content[a][ref])}>
+         <Text style={styles.aText}>{ref}</Text>
         </Pressable>
       case "Video":
         return (
-          <Pressable style={styles.video} onPress={
+          <Pressable key={content[a] + Math.random()} style={styles.video} onPress={
             async ()=>{
               await Linking.openURL(content[a])
             }
           }>
-            <View style={styles.CiclePlay}>
+            <View key={content[a] + Math.random()} style={styles.CiclePlay}>
               <Icon size={75} color="#FEBD00" name="play-circle"/>
             </View>
             <Image
@@ -60,18 +63,71 @@ export default function ModalScreen({ navigation, route }) {
       case "List":
         return (
           content[a].map((b) => {
-            return (<Text style={styles.ul}><Text style={styles.li}>    • </Text>{b}</Text>)
+            return (<Text key={b + Math.random()} style={styles.ul}><Text style={styles.li}>    • </Text>{b}</Text>)
           })
         );
       case "Image":
         return (
-          <Image
-            style={{height: 100, width: _width-40 }}
-          />
+          <View 
+            style={{
+              borderRadius: 10,
+              overflow: "hidden"
+            }}
+          >
+            <Image
+            source={{uri: content[a]}}
+            style={{
+              width: _width - 40,
+              height: 200,
+              resizeMode: "contain",
+              borderRadius: 0,
+              backgroundColor: "#FCFCFC"
+            }}/>
+          </View>
         );
       case "PDF":
         return (
-          <></> 
+          <View
+            style={{
+              height: 150,
+              width: 200,
+              borderColor: "#333",
+              borderWidth: 2,
+              borderRadius: 10,
+              overflow: "hidden",
+              justifyContent: "flex-end",
+            }}
+          >
+            <View
+              style={{
+                height: "100%",
+                width: "100%",
+                bottom: -55,
+                alignItems: "center"
+              }}
+            >
+              <IconAnt size={120} color="#FEB" name="pdffile1"/>
+            </View>
+            <View
+              style={{  
+                width: "100%",
+                height: 50,
+                backgroundColor: "#333",
+                justifyContent: "flex-start",
+                padding: 5,
+                flexDirection: "row",
+                alignItems: "center" 
+              }}
+            >
+              <IconMat size={30} color="#FEBD00" name="file-pdf-box"/>
+              <Text
+                style={{
+                  marginLeft: 3,
+                  color: "#fff"
+                }}
+              >- {content[a]}</Text>
+            </View>
+          </View>
         );
       default:
         return;
@@ -93,6 +149,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 14,
+    marginBottom: 5,
     fontSize: 36,
     color: "#282A36",
     textTransform: "uppercase",
@@ -103,7 +160,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   subtitle: {
-    fontSize: 16,
+    marginBottom: 10,
+    fontSize: 18,
     color: "#333",
     textTransform: "uppercase"
   },
@@ -129,15 +187,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     overflow: "hidden",
-    borderWidth: 2,
-    borderColor: "#333"
   },
   li: {
     fontWeight: "bold",
-    fontSize: 15
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#FEBD00"
   },
   ul: {
-    fontSize: 15,
+    fontSize: 16,
     margin: 2
   },
   CiclePlay: {
@@ -157,12 +215,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 2,
     borderRadius: 100,
-    backgroundColor: "#008cff33",
-    borderColor: "#008cff",
-    borderWidth: 1,
-    color: "red"
+    borderColor: "#FEBD00",
+    borderWidth: 2,
+    marginVertical: 10
   },
   aText: {
-    color: "red",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    color: "#FEBD00"
   }
 });

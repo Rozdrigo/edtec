@@ -46,6 +46,7 @@ export default function TabOneScreen({ navigation }) {
           <BoxQuizz color="#262938"
             info01={10}
             info02={7}
+            navigation={navigation}
           />
           <View style={styles.marker}>
             <View><Text style={styles.markerText}>DISCIPLINAS</Text></View>

@@ -2,24 +2,24 @@
     "Semestre I":{
         "Mecânica dos solos": [
             {
-                "Enunciado": "In volutpat, orci sit amet consequat luctus, enim elit tristique mauris, at commodo velit lacus eget dui. Etiam non eros augue. Fusce quis lorem leo. Nam suscipit id erat volutpat efficitur?",
+                "Enunciate": "In volutpat, orci sit amet consequat luctus, enim elit tristique mauris, at commodo velit lacus eget dui. Etiam non eros augue. Fusce quis lorem leo. Nam suscipit id erat volutpat efficitur?",
                 "Image": "image quest",
-                "Alternativas": ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D", "Alternativa E"]
+                "Alternatives": ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D", "Alternativa E"]
             },
             {
-                "Enunciado": "In volutpat, orci sit amet consequat luctus, enim elit tristique mauris, at commodo velit lacus eget dui. Etiam non eros augue. Fusce quis lorem leo. Nam suscipit id erat volutpat efficitur?",
+                "Enunciate": "In volutpat, orci sit amet consequat luctus, enim elit tristique mauris, at commodo velit lacus eget dui. Etiam non eros augue. Fusce quis lorem leo. Nam suscipit id erat volutpat efficitur?",
                 "Image": "image quest",
-                "Alternativas": ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D", "Alternativa E"]
+                "Alternatives": ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D", "Alternativa E"]
             },
             {
-                "Enunciado": "In volutpat, orci sit amet consequat luctus, enim elit tristique mauris, at commodo velit lacus eget dui. Etiam non eros augue. Fusce quis lorem leo. Nam suscipit id erat volutpat efficitur?",
+                "Enunciate": "In volutpat, orci sit amet consequat luctus, enim elit tristique mauris, at commodo velit lacus eget dui. Etiam non eros augue. Fusce quis lorem leo. Nam suscipit id erat volutpat efficitur?",
                 "Image": "image quest",
-                "Alternativas": ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D", "Alternativa E"]
+                "Alternatives": ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D", "Alternativa E"]
             },
             {
-                "Enunciado": "In volutpat, orci sit amet consequat luctus, enim elit tristique mauris, at commodo velit lacus eget dui. Etiam non eros augue. Fusce quis lorem leo. Nam suscipit id erat volutpat efficitur?",
+                "Enunciate": "In volutpat, orci sit amet consequat luctus, enim elit tristique mauris, at commodo velit lacus eget dui. Etiam non eros augue. Fusce quis lorem leo. Nam suscipit id erat volutpat efficitur?",
                 "Image": "image quest",
-                "Alternativas": ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D", "Alternativa E"]
+                "Alternatives": ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D", "Alternativa E"]
             }
         ]
     }

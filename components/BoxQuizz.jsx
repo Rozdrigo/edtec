@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, Dimensions, Image, View } from 'react-native';
+import { StyleSheet, Text, Dimensions, Image, View, Pressable } from 'react-native';
 
 var _width = Dimensions.get("screen").width;
 export default function BoxQuizz(props) {
@@ -7,7 +7,11 @@ export default function BoxQuizz(props) {
         _width = Dimensions.get("screen").width
     }, [Dimensions.get("screen").width])
     return (
-        <View style={{
+        <Pressable
+        onPress={()=> {
+            props.navigation.navigate("OptionQuizz");
+        }}
+        style={{
             height: 100,
             width: _width - 30,
             marginVertical: 10,
@@ -29,7 +33,7 @@ export default function BoxQuizz(props) {
             bottom: 0,
             right: 30
         }} source={require('../assets/page_images/QuizzImage.png')}></Image>
-        </View>
+        </Pressable>
     );
 }
 
