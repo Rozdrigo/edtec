@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, Dimensions, Image, View } from 'react-native';
+import { StyleSheet, Text, Dimensions, Image, View, TouchableOpacity } from 'react-native';
 
 var _width = Dimensions.get("screen").width;
 export default function DoYouKnow(props) {
@@ -7,7 +7,12 @@ export default function DoYouKnow(props) {
         _width = Dimensions.get("screen").width
     }, [Dimensions.get("screen").width])
     return (
-        <View style={{
+        <TouchableOpacity
+        onPress={() => {
+            props.navigation.navigate("MEMORIAL", props.navigation);
+          }}
+        activeOpacity={0.9}
+        style={{
             height: 100,
             width: _width - 30,
             marginVertical: 10,
@@ -33,7 +38,7 @@ export default function DoYouKnow(props) {
             bottom: 0,
             right: 20
         }} source={require('../assets/page_images/DoYouKnowImage.png')}></Image>
-        </View>
+        </TouchableOpacity>
     );
 }
 
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
         color: "#4FFA7B",
         fontWeight: 'bold',
         fontSize: 30,
-        marginHorizontal: 10,
+        marginLeft: 10,
         textAlign: "center",
     },
     author: {

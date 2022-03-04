@@ -1,7 +1,7 @@
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 
 import data from '../database/data.json';
-
+import Animation from "../components/Animation"
 import BoxContent from  '../components/ButtonBoxContent';
 
 export default function ModalScreen({navigation, route}) {
@@ -12,10 +12,10 @@ export default function ModalScreen({navigation, route}) {
   var ContentList = Object.keys(content).map((b, c) => (
     <BoxContent
         key={c}
-        color="#282A36"
-        title={b.length > 32 ? b.slice(0, 32) + "..." : b}
+        color="#FF5700"
+        title={b}
         navigation={navigation}
-        to="Material"
+        to="MATERIAL"
         subtitle={content[b].Title == undefined ? title : content[b]["Title"]}
         module={subtitle}
         subModule={title}
@@ -24,7 +24,14 @@ export default function ModalScreen({navigation, route}) {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-      {ContentList}
+      <Animation name="81215-error-x.json"/>
+      {ContentList[0] == undefined ? <Text
+      style={{
+        textAlign: "center",
+        fontWeight: "bold",
+        margin: 20,
+      }}
+      > 📝 Nada por aqui, ainda...</Text>: ContentList}
     </ScrollView>
   );
 }

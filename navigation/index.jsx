@@ -7,11 +7,15 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import ContentScreen from "../screens/ContentScreen"
+import ContentScreen from "../screens/ContentScreen";
 import OptionsQuizzScreen from "../screens/OptionsQuizzScreen";
+import SearchScreen from "../screens/SearchScreen";
+import QuizzScreen from "../screens/QuizzScreen";
+import Memorial from "../screens/Memorial"
 
-import Pdf from "../screens/PdfScreen"
-import MaterialScreen from "../screens/MaterialScreen"
+import Success from "../screens/SuccessScreen";
+import Error from "../screens/ErrorScreen";
+import MaterialScreen from "../screens/MaterialScreen";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -28,7 +32,6 @@ export default function Navigation({ colorScheme }) {
 }
 
 const Stack = createNativeStackNavigator();
-
 function RootNavigator() {
   return (
     <Stack.Navigator>
@@ -38,9 +41,51 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Conteúdos" component={ContentScreen} options={{ headerStyle: {backgroundColor: "#FEBD00" }}} />
-        <Stack.Screen name="Material" component={MaterialScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="OptionQuizz" component={OptionsQuizzScreen} options={{ headerTintColor: "white", headerStyle: {backgroundColor: "#282A36" }}}/>
+        <Stack.Screen
+          name="CONTEÚDO"
+          component={ContentScreen}
+          options={{ headerStyle: { backgroundColor: "#FEBD00" } }}
+        />
+        <Stack.Screen
+          name="MATERIAL"
+          component={MaterialScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="OPÇÕES"
+          component={OptionsQuizzScreen}
+          options={{
+            headerTintColor: "white",
+            headerStyle: { backgroundColor: "#282A36" },
+          }}
+        />
+        <Stack.Screen
+          name="BUSCA"
+          component={SearchScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="QUIZZ"
+          component={QuizzScreen}
+          options={{
+            headerTintColor: "white",
+            headerStyle: { backgroundColor: "#282A36" },
+          }}
+        />
+        <Stack.Screen
+          name="SUCCESS"
+          component={Success}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ERROR"
+          component={Error}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MEMORIAL"
+          component={Memorial}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -49,7 +94,6 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
-
   return (
     <BottomTab.Navigator
       initialRouteName="EDTEC"
@@ -58,7 +102,7 @@ function BottomTabNavigator() {
         tabBarInactiveTintColor: "#FF9900",
         tabBarInactiveBackgroundColor: "#FEBD00",
         tabBarActiveBackgroundColor: "#FEBD00",
-        headerStyle: {backgroundColor: "#FEBD00"}
+        headerStyle: { backgroundColor: "#FEBD00" },
       }}
     >
       <BottomTab.Screen
@@ -66,7 +110,7 @@ function BottomTabNavigator() {
         component={TabOneScreen}
         options={({ navigation }) => ({
           title: "HOME",
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color}/>
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         })}
       />
       <BottomTab.Screen
@@ -74,15 +118,9 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: "DISCIPLINAS",
-          tabBarIcon: ({ color }) => <TabBarIcon name="bookmark" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="PDF"
-        component={Pdf}
-        options={{
-          title: "PDF",
-          tabBarIcon: ({ color }) => <TabBarIcon name="bookmark" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="bookmark" color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>

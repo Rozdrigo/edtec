@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { StyleSheet, Text, Dimensions, View, Pressable } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, Dimensions, View } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -9,9 +9,9 @@ export default function buttonBoxContent(props) {
   useEffect(() => {
     _width = Dimensions.get("screen").width;
   }, [Dimensions.get("screen").width]);
-
   return (
-    <Pressable
+    <TouchableOpacity
+    activeOpacity={0.9}
       onPress={() => {
         props.navigation.navigate(props.to, {
           title: props.title,
@@ -19,7 +19,6 @@ export default function buttonBoxContent(props) {
           module: props.module,
           subModule: props.subModule,
         });
-        console.log("Touch " + props.title);
       }}
       style={styles.container}
     >
@@ -40,7 +39,7 @@ export default function buttonBoxContent(props) {
         <Text style={styles.title}>{props.title.length > 32 ? props.title.slice(0, 32) + "..." : props.title}</Text>
         <Text style={styles.subtitle}>{props.subtitle}</Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 

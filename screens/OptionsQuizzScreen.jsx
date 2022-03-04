@@ -1,65 +1,178 @@
 import React, {useEffect, useState} from "react";
 import { StatusBar } from "expo-status-bar";
-import { ScrollView, Dimensions, StyleSheet, View, Text } from "react-native";
+import { TouchableHighlight, Image, Dimensions, StyleSheet, View, Text, Pressable } from "react-native";
 import BannerQuizz from "../components/BannerQuizz";
 import {Picker} from '@react-native-picker/picker';
+import data from '../database/data.json';
+import { useFocusEffect } from "@react-navigation/native";
+
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 var _width = Dimensions.get("screen").width;
 
-export default function TabOneScreen({ navigation }) {
-  const [selectedLanguage, setSelectedLanguage] = useState();
+export default function OptionsQuizzScreen({ navigation }) {
+  const [SelectSemestre, setSelectSemestre] = useState("Semestre I");
+  const [SelectDiciplina, setSelectDiciplina] = useState();
+
+  const [corrects, setCorrects] = useState(0);
+  const [errors, setErrors] = useState(0);
+
+  useFocusEffect(
+    React.useCallback( () => {
+      ( async () => {var x = await AsyncStorage.getItem("corrects");
+      var y = await AsyncStorage.getItem("errors");
+      setCorrects(x != null ? x : 0);
+      setErrors(y != null ? y : 0);})()
+    })
+  );
+
   useEffect(()=> {
-    _width = Dimensions.get("screen").width
+    _width = Dimensions.get("screen").width;
+    setSelectDiciplina(Object.keys(data.Questions[SelectSemestre])[0])
   }, [Dimensions.get("screen").width]);
+
+  function mapSemestres(){
+    return Object.keys(data.Questions).map((a) => {
+      return(
+        <Picker.Item label={a} value={a}/>
+      );
+    })
+  }
+  function mapDisciplinas(){
+    return Object.keys(data.Questions[SelectSemestre]).map((a) => {
+      return(
+        <Picker.Item label={a} value={a}/>
+      );
+    })
+  }
 
   return (
     <>
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+      <View style={styles.container}>
       <StatusBar style="light" backgroundColor="#282A36"/>
         <BannerQuizz/>
         <View style={styles.box}>
         <View style={styles.Picker}>
         <Text style={styles.Title}>Semestre</Text>
         <Picker
-          selectedValue={selectedLanguage}
-          onValueChange={(itemValue, itemIndex) =>
-          setSelectedLanguage(itemValue)
+          selectedValue={SelectSemestre}
+          onValueChange={(itemValue, itemIndex) => {
+            setSelectSemestre(itemValue)
+            setSelectDiciplina(Object.keys(data.Questions[itemValue])[0])
+          }
           }>
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
+          {mapSemestres()}
         </Picker> 
         </View>
         <View style={styles.Picker}>
+        <Text style={styles.Title}>Disciplinas</Text>
         <Picker
-          selectedValue={selectedLanguage}
+          selectedValue={SelectDiciplina}
           onValueChange={(itemValue, itemIndex) =>
-          setSelectedLanguage(itemValue)
+          setSelectDiciplina(itemValue)
           }>
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
-        </Picker> 
+            {mapDisciplinas()}
+        </Picker>
+        </View>
+        <View
+        style={{
+            height: Dimensions.get("window").height - _width * 0.757638888888 - 215,
+            width: _width - 30,
+            padding: 20,
+            marginVertical: 10,
+            borderRadius: 10,
+            backgroundColor: "#262938",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            flexDirection: "row",
+            overflow: 'hidden'
+        }}>
+            <View style={styles.boxText}>
+              <TouchableHighlight 
+              activeOpacity={0.9}
+              underlayColor="#FF5700"
+              style={styles.buttom}
+              onPress={()=>{
+                navigation.navigate("QUIZZ", {
+                  semestre: SelectSemestre,
+                  disciplina: SelectDiciplina,
+                  sort: 0
+                })
+              }}
+              >
+                <Text style={styles.title}>COMEÇAR</Text>
+              </TouchableHighlight>
+              <Text style={styles.info}>
+                <Text style={styles.verify}>✓</Text> - {corrects}
+                {"\n"}
+                <Text style={styles.close}>✗</Text> - {errors}
+              </Text>
+            </View>
+            <Image style={{
+            height: 140,
+            width: 220,
+            position: 'relative',
+            bottom: -20,
+            right: 30
+        }} source={require('../assets/page_images/QuizzImage.png')}></Image>
         </View>
         </View>
-      </ScrollView>
+      </View>
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  buttom: {
+    backgroundColor: "#FF5700",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 10,
+    marginBottom: 20
+  },
+  boxText: {
+      height: "100%",
+  },
+  title: {
+      fontSize: 40,
+      fontWeight: "bold",
+      color: "white"
+  },
+  info: {
+      color: "white",
+      fontWeight: 'bold',
+      fontSize: 30,
+      textAlign: "justify"
+  },
+  verify: {
+      color: "#4FFA7B",
+      fontWeight: 'bold'
+  },
+  close: {
+      color: "#FF0000",
+      fontWeight: 'bold',
+  },
   container: {
     flex: 1,
     backgroundColor: "#282A36"
   },
   Title: {
+    borderRadius: 50,
+    borderColor: "#333",
+    borderWidth: 2,
     position: "absolute",
-    top: -14,
+    top: -15,
     left: 30,
     fontSize: 14,
     backgroundColor: "white",
-    padding: 3
+    paddingHorizontal: 15,
+    paddingLeft: 18,
+    paddingTop: 2,
+    justifyContent: "center",
+    alignItems: "center"
   },
   box: {
-    height: 1000,
+    height: Dimensions.get("window").height - _width * 0.757638888888,
     marginTop: -45,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -73,9 +186,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   Picker: {
+    marginVertical: 10,
     justifyContent: "center",
     height: 50,
-    marginVertical: 5,
     paddingHorizontal: 10,
     borderColor: "black",
     borderRadius: 50,

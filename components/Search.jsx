@@ -11,9 +11,14 @@ export default function Search(props) {
     }, [Dimensions.get("screen").width])
 
     return (
-        <Pressable style={styles.container}>
+        <Pressable 
+        style={styles.container}
+        onPress={()=>{
+            props.navigation.navigate("BUSCA");
+        }}
+        >
             <Icon color="#333" size={20} name="search"/>
-            <Text style={styles.placeholder}>Que disciplina deseja encontrar?</Text>
+            <Text style={styles.placeholder}>O que você deseja encontrar?</Text>
         </Pressable>
     );
 }
