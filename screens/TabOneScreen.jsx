@@ -12,6 +12,7 @@ import BoxQuizz from "../components/BoxQuizz";
 import DoYouKnow from "../components/DoYouKnow";
 import BoxContent from "../components/ButtonBoxContent";
 import { useFocusEffect } from "@react-navigation/native";
+import { Link } from "@react-navigation/native"
 
 import data from "../database/data.json";
 
@@ -27,14 +28,15 @@ export default function TabOneScreen({ navigation }) {
   const [semestre, setSemestre] = useState("Semestre I");
 
   useFocusEffect(
-    React.useCallback( () => {
-      ( async () => {var x = await AsyncStorage.getItem("corrects");
-      var y = await AsyncStorage.getItem("errors");
-      setCorrects(x != null ? x : 0);
-      setErrors(y != null ? y : 0);})()
+    React.useCallback(() => {
+      (async () => {
+        var x = await AsyncStorage.getItem("corrects");
+        var y = await AsyncStorage.getItem("errors");
+        setCorrects(x != null ? x : 0);
+        setErrors(y != null ? y : 0);
+      })();
     })
   );
-  
 
   useEffect(() => {
     _width = Dimensions.get("screen").width;
@@ -42,7 +44,7 @@ export default function TabOneScreen({ navigation }) {
 
   var mapSemestres = Object.keys(data.Disciplinas).map((a) => (
     <Picker.Item label={a.toUpperCase()} value={a} />
-  ));
+  ), []);
 
   var render = Object.keys(data.Disciplinas[semestre]).map((b, c) => (
     <BoxContent
@@ -63,7 +65,11 @@ export default function TabOneScreen({ navigation }) {
         <View style={styles.box}>
           <Search navigation={navigation}></Search>
           <Text style={styles.homeText}>Você sabia?</Text>
-          <DoYouKnow color="#FF5700" navigation={navigation} info01="Escalimetro não é régua" />
+          <DoYouKnow
+            color="#FF5700"
+            navigation={navigation}
+            info01="Escalimetro não é régua"
+          />
           <BoxQuizz
             color="#262938"
             corrects={corrects}
@@ -90,13 +96,22 @@ export default function TabOneScreen({ navigation }) {
           </View>
           {render}
         </View>
+        <Link style={styles.me} to={{screen: 'MEMORIAL'}}>Desenvolvido com <Text style={styles.bold}>♥</Text> por <Text style={styles.bold}>Edificações</Text> (2019 - 2021)</Link>
       </ScrollView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  Picker: {},
+  bold: {
+    fontWeight: "bold"
+  },
+  me: {
+    backgroundColor: "#F0F0FB",
+    textAlign: "center",
+    fontSize: 12,
+    padding: 5,
+  },
   container: {
     flex: 1,
     backgroundColor: "#FEBD00",

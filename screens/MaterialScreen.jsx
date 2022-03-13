@@ -27,19 +27,19 @@ export default function ModalScreen({ navigation, route }) {
       case "Title":
         return (
           <Text key={content[a] + Math.random()} style={styles.title}>
-            {content[a]}
+            {content[a].trim()}
           </Text>
         );
       case "Subtitle":
         return (
           <Text key={content[a] + Math.random()} style={styles.subtitle}>
-            {content[a]}
+            {content[a].trim()}
           </Text>
         );
       case "Body":
         return (
           <Text key={content[a] + Math.random()} style={styles.body}>
-            {content[a]+ "\n"}
+            {content[a]}
           </Text>
         );
       case "Link":
@@ -50,7 +50,7 @@ export default function ModalScreen({ navigation, route }) {
             style={styles.a}
             onPress={async () => await Linking.openURL(content[a][ref])}
           >
-            <Text style={styles.aText}>{ref}</Text>
+            <Text style={styles.aText}>{ref.trim()}</Text>
           </Pressable>
         );
       case "Video":
@@ -84,31 +84,75 @@ export default function ModalScreen({ navigation, route }) {
         return content[a].map((b, c) => {
           return (
             <Text key={b + Math.random()} style={styles.ul}>
-              <Text key={b + "b" + Math.random()} style={styles.li}> • </Text>
-              {b}
-              {content[a].length == c+1 ? <Text>{"\n"}</Text> : null}
+              <Text key={b + "b" + Math.random()} style={styles.li}>
+                {" "}
+                •{" "}
+              </Text>
+              {b.trim()}
             </Text>
+          );
+        });
+      case "NumListPic":
+        var count = 0;
+        return content[a].map((b, c) => {
+          var _heigth = 200;
+          return (
+            <>
+              {b.search("data:") != -1 && b.search(";base64,") != -1 ? (
+                <View
+                  style={{
+                    overflow: "hidden",
+                    marginVertical: 10,
+                  }}
+                >
+                  <Pressable
+                    onLongPress={() => {
+                      navigation.navigate("IMAGEM", { image: b });
+                    }}
+                  >
+                    <Image
+                      source={{ uri: b }}
+                      style={{
+                        width: _width - 40,
+                        height: _heigth,
+                        resizeMode: "contain",
+                      }}
+                    />
+                  </Pressable>
+                </View>
+              ) : (
+                <Text key={b + Math.random()} style={styles.ul}>
+                  <Text key={b + "b" + Math.random()} style={styles.li}>
+                    {(count += 1)}.{" "}
+                  </Text>
+                  {b}
+                </Text>
+              )}
+            </>
           );
         });
       case "Image":
         return (
           <View
             style={{
-              borderRadius: 10,
               overflow: "hidden",
+              marginVertical: 10,
             }}
           >
-            <Image
-              source={{ uri: content[a] }}
-              style={{
-                width: _width - 40,
-                height: 200,
-                resizeMode: "contain",
-                borderRadius: 0,
-                backgroundColor: "#FCFCFC",
+            <Pressable
+              onLongPress={() => {
+                navigation.navigate("IMAGEM", { image: content[a] });
               }}
-            />
-            <Text>{"\n"}</Text>
+            >
+              <Image
+                source={{ uri: content[a] }}
+                style={{
+                  width: _width - 40,
+                  height: 200,
+                  resizeMode: "contain",
+                }}
+              />
+            </Pressable>
           </View>
         );
       default:
@@ -159,7 +203,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   subtitle: {
-    marginBottom: 10,
+    marginVertical: 10,
     fontSize: 18,
     color: "#333",
     textTransform: "uppercase",
@@ -178,9 +222,10 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 3,
   },
   body: {
+    marginVertical: 10,
     textAlign: "justify",
     fontSize: 15,
-    fontStyle: "italic"
+    fontStyle: "italic",
   },
   video: {
     marginVertical: 10,
@@ -196,8 +241,9 @@ const styles = StyleSheet.create({
   },
   ul: {
     fontSize: 16,
-    margin: 2,
-    fontStyle: "italic"
+    marginVertical: 2,
+    fontStyle: "italic",
+    textAlign: "justify",
   },
   CiclePlay: {
     justifyContent: "center",

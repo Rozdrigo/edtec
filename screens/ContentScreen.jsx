@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView, View, StyleSheet, Text } from 'react-native';
 
 import data from '../database/data.json';
 import Animation from "../components/Animation"
@@ -25,13 +25,20 @@ export default function ModalScreen({navigation, route}) {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <Animation name="81215-error-x.json"/>
-      {ContentList[0] == undefined ? <Text
-      style={{
-        textAlign: "center",
-        fontWeight: "bold",
-        margin: 20,
-      }}
-      > 📝 Nada por aqui, ainda...</Text>: ContentList}
+      <View
+        style={{
+          marginTop: 15,
+          marginBottom: 30
+        }}
+      >
+        {ContentList[0] == undefined ? <Text
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
+          margin: 20,
+        }}
+        > 📝 Nada por aqui, ainda...</Text>: ContentList}
+      </View>
     </ScrollView>
   );
 }

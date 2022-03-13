@@ -1,29 +1,41 @@
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import LottieView from 'lottie-react-native';
-import data from "../database/data.json";
 import sortQuestion from "../services/sortQuestions"
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StatusBar } from 'react-native';
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export default class App extends React.Component {
+
   componentDidMount() {
     this.animation.play();
+    this.animation.forceUpdate()
+    Toast.show({
+      topOffset: 10,
+      type: "error",
+      text1: "Infelizmente não foi dessa vez",
+      text2:
+        "A alternativa correta não foi selecionada ☹️",
+    })
   }
 
   resetAnimation = () => {
     this.animation.reset();
     this.animation.play();
   };
+  
   render() {
     return (
       <View style={styles.animationContainer}>
+        <Toast />
         <LottieView
           ref={animation => {
             this.animation = animation;
           }}
           style={{
-            width: 500,
-            height: 500,
+            width: 400,
+            height: 400,
           }}
           source={require("../assets/Animation/erro.json")}
           loop={false}
@@ -50,6 +62,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   animationContainer: {
+    marginTop: StatusBar.currentHeight,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',

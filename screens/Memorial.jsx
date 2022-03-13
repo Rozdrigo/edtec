@@ -1,10 +1,15 @@
-import React from "react";
-import { Text } from "react-native";
+import React, { useEffect } from "react";
+import { Text, Image, Dimensions } from "react-native";
 import { ScrollView } from "react-native";
-import Animation from "../components/Animation"
 
+var _width = Dimensions.get("screen").width;
 
 export default function Memorial(){
+
+    useEffect(() => {
+        _width = Dimensions.get("screen").width;
+      }, [Dimensions.get("screen").width]);
+
     return(
         <ScrollView
             showsVerticalScrollIndicator={false}
@@ -12,7 +17,13 @@ export default function Memorial(){
                 backgroundColor: "#FFF"
             }}
         >
-            <Animation/>
+            <Image source={require("../assets/page_images/We.png")}
+            style={{
+                marginTop: 10,
+                width: _width,
+                height: _width * 0.7658827658827659
+            }}
+            />
             <Text
                 style={{
                     textAlign: "center",

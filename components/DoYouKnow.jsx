@@ -1,23 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, Dimensions, Image, View, TouchableOpacity } from 'react-native';
+import data from "../database/data.json"
 
 var _width = Dimensions.get("screen").width;
+
 export default function DoYouKnow(props) {
+    const [text, setText] = useState("");
+
     useEffect(() => {
+        setText(data.DoYouKnow[Math.floor(Math.random() * data.DoYouKnow.length)]);
         _width = Dimensions.get("screen").width
     }, [Dimensions.get("screen").width])
     return (
         <TouchableOpacity
-        onPress={() => {
-            props.navigation.navigate("MEMORIAL", props.navigation);
-          }}
+        onPress={()=> {
+            setText(data.DoYouKnow[Math.floor(Math.random() * data.DoYouKnow.length)]);
+        }}
         activeOpacity={0.9}
         style={{
             height: 100,
             width: _width - 30,
             marginVertical: 10,
+            justifyContent: "center",
+            alignItems: "center",
             backgroundColor: props.color,
-            justifyContent: "space-between",
             alignItems: "flex-end",
             flexDirection: "row",
             borderRadius: 10,
@@ -27,7 +33,7 @@ export default function DoYouKnow(props) {
                 <View style={styles.subBoxText}>
                     <View><Text style={styles.emoji}>🤔</Text></View>
                     <View>
-                        <Text style={styles._info}>{props.info01}</Text>
+                        <Text style={styles._info}>{text}</Text>
                     </View>
                 </View>
             </View>
@@ -46,7 +52,8 @@ const styles = StyleSheet.create({
     boxText: {
         height: "100%",
         marginHorizontal: 20,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: "center"
     },
     title: {
         marginTop: -19,
@@ -56,6 +63,8 @@ const styles = StyleSheet.create({
         color: "white"
     },
     _info: {
+        fontSize: 12,
+        marginHorizontal: 5,
         color: "white",
         fontWeight: 'bold',
         width: _width / 100 * 60,
@@ -66,10 +75,12 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },  
     emoji: {
+        position: "relative",
         color: "#4FFA7B",
         fontWeight: 'bold',
         fontSize: 30,
-        marginLeft: 10,
+        left: 5,
+        marginRight: 10,
         textAlign: "center",
     },
     author: {

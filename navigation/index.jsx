@@ -19,6 +19,7 @@ import MaterialScreen from "../screens/MaterialScreen";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import LinkingConfiguration from "./LinkingConfiguration";
+import ImageZoom from "../screens/ImageZoom";
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -87,6 +88,10 @@ function RootNavigator() {
           component={Memorial}
         />
       </Stack.Group>
+      <Stack.Screen
+          name="IMAGEM"
+          component={ImageZoom}
+        />
     </Stack.Navigator>
   );
 }

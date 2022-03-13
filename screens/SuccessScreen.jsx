@@ -3,10 +3,21 @@ import { StyleSheet, View } from 'react-native';
 import LottieView from 'lottie-react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import sortQuestion from "../services/sortQuestions"
+import { StatusBar } from 'react-native';
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 export default class App extends React.Component {
+
   componentDidMount() {
     this.animation.play();
+    this.animation.forceUpdate()
+    Toast.show({
+      topOffset: 10,
+      type: "success",
+      text1: "Parabéns, você acertou a questão",
+      text2:
+        "A alternativa correta foi selecionada 🎉",
+    })
   }
 
   resetAnimation = () => {
@@ -17,6 +28,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.animationContainer}>
+        <Toast />
         <LottieView
           ref={animation => {
             this.animation = animation;
@@ -49,6 +61,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   animationContainer: {
+    marginTop: StatusBar.currentHeight,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
