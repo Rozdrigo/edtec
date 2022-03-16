@@ -20,7 +20,7 @@ export default function ModalScreen({ navigation, route }) {
   useEffect(() => {
     _width = Dimensions.get("screen").width;
   }, [Dimensions.get("screen").width]);
-
+  var memorizade = "";
   var content = data.Disciplinas[module][subModule][title];
   var RenderContent = Object.keys(content).map((a) => {
     switch (a.split(" ")[0]) {
@@ -43,14 +43,39 @@ export default function ModalScreen({ navigation, route }) {
           </Text>
         );
       case "Link":
+        function avaliable() {
+          colorized = colors[Math.floor(Math.random()*colors.length)];
+          colorized == memorizade ? avaliable() : memorizade = colorized;
+        };
         var ref = Object.keys(content[a])[0];
+        const colors = ["#FD5800", "#009549", "#6D6ADB", "#9400D3", "#1E90FF"];
+        var colorized = "";
+        avaliable();
         return (
           <Pressable
             key={content[a] + Math.random()}
-            style={styles.a}
+            style={{
+              alignSelf: "flex-start",
+              width: _width - 40,
+              alignItems: "center",
+              paddingVertical: 2,
+              borderRadius: 100,
+              borderColor: colorized,
+              backgroundColor: colorized,
+              borderWidth: 2,
+              marginVertical: 10,
+            }}
             onPress={async () => await Linking.openURL(content[a][ref])}
           >
-            <Text style={styles.aText}>{ref.trim()}</Text>
+            <Text
+              style={{
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                color: "#FFF",
+              }}
+            >
+              {ref.trim()}
+            </Text>
           </Pressable>
         );
       case "Video":
@@ -97,7 +122,7 @@ export default function ModalScreen({ navigation, route }) {
         return content[a].map((b, c) => {
           var _heigth = 200;
           return (
-            <>
+            <View key={c+"A"}>
               {b.search("data:") != -1 && b.search(";base64,") != -1 ? (
                 <View
                   style={{
@@ -128,12 +153,13 @@ export default function ModalScreen({ navigation, route }) {
                   {b}
                 </Text>
               )}
-            </>
+            </View>
           );
         });
       case "Image":
         return (
           <View
+            key={Math.random() + Math.random()}
             style={{
               overflow: "hidden",
               marginVertical: 10,

@@ -26,7 +26,7 @@ export default function ModalScreen({ navigation, route }) {
     var abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     correct = abc.split("")[n.Correct];
     return (
-      <View>
+      <View key={Math.random()}>
         <Text
           style={{
             textAlign: "justify",
@@ -43,17 +43,18 @@ export default function ModalScreen({ navigation, route }) {
           </Text>{" "}
           - {n.Enunciate}
         </Text>
-        {n.image != null ? (
+        {n.Image != null ? (
           <Image
             resizeMode="contain"
             source={{ uri: n.Image }}
             style={styles.image}
           />
         ) : (
-          <Thinking />
+          <Thinking/>
         )}
         {n.Alternatives.map((a, b) => (
           <TouchableOpacity
+            key={Math.random() + b}
             activeOpacity={0.8}
             onPress={() => {
               setSelect(abc.split("")[b]);

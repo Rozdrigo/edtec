@@ -5,8 +5,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Picker,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import Banner from "../components/Banner";
 import BoxQuizz from "../components/BoxQuizz";
 import DoYouKnow from "../components/DoYouKnow";
@@ -42,8 +42,8 @@ export default function TabOneScreen({ navigation }) {
     _width = Dimensions.get("screen").width;
   }, [Dimensions.get("screen").width]);
 
-  var mapSemestres = Object.keys(data.Disciplinas).map((a) => (
-    <Picker.Item label={a.toUpperCase()} value={a} />
+  var mapSemestres = Object.keys(data.Disciplinas).map((a, b) => (
+    <Picker.Item key={b} label={a.toUpperCase()} value={a} />
   ), []);
 
   var render = Object.keys(data.Disciplinas[semestre]).map((b, c) => (

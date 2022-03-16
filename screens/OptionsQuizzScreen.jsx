@@ -32,16 +32,16 @@ export default function OptionsQuizzScreen({ navigation }) {
   }, [Dimensions.get("screen").width]);
 
   function mapSemestres(){
-    return Object.keys(data.Questions).map((a) => {
+    return Object.keys(data.Questions).map((a, b) => {
       return(
-        <Picker.Item label={a} value={a}/>
+        <Picker.Item key={b + "M"} label={a} value={a}/>
       );
     })
   }
   function mapDisciplinas(){
-    return Object.keys(data.Questions[SelectSemestre]).map((a) => {
+    return Object.keys(data.Questions[SelectSemestre]).map((a, b) => {
       return(
-        <Picker.Item label={a} value={a}/>
+        <Picker.Item key={b} label={a} value={a}/>
       );
     })
   }

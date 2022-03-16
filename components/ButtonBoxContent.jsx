@@ -20,11 +20,19 @@ export default function buttonBoxContent(props) {
           subModule: props.subModule,
         });
       }}
-      style={styles.container}
+      style={{
+        backgroundColor: props.title == "Boas-Vindas ao Curso" ? "#E4D3B1" : "#F0F0FB",
+        height: 50,
+        width: _width - 30,
+        marginTop: 10,
+        borderRadius: 50,
+        flexDirection: "row",
+        alignItems: "center",
+      }}
     >
       <View
         style={{
-          backgroundColor: props.color,
+          backgroundColor: props.title == "Boas-Vindas ao Curso" ? "#C4A15F" : props.color,
           borderRadius: 1000,
           height: 35,
           width: 35,
@@ -37,7 +45,7 @@ export default function buttonBoxContent(props) {
       </View>
       <View style={styles.textBox}>
         <Text style={styles.title}>{props.title.length > 32 ? props.title.slice(0, 32) + "..." : props.title}</Text>
-        <Text style={styles.subtitle}>{props.subtitle}</Text>
+        <Text style={styles.subtitle}>{props.subtitle.length > 42 ? props.subtitle.slice(0, 42) + "..." : props.subtitle}</Text>
       </View>
     </TouchableOpacity>
   );

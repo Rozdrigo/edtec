@@ -10,6 +10,7 @@ export default function ModalScreen({navigation, route}) {
   var content = data.Disciplinas[subtitle][title]
   
   var ContentList = Object.keys(content).map((b, c) => (
+    b != "Type" ?
     <BoxContent
         key={c}
         color="#FF5700"
@@ -20,6 +21,8 @@ export default function ModalScreen({navigation, route}) {
         module={subtitle}
         subModule={title}
       />
+      :
+      null
     ))
 
   return (

@@ -5,6 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import sortQuestion from "../services/sortQuestions"
 import { StatusBar } from 'react-native';
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { TouchableOpacity } from 'react-native';
+import Icon from "@expo/vector-icons/AntDesign";
 
 export default class App extends React.Component {
 
@@ -19,11 +21,6 @@ export default class App extends React.Component {
         "A alternativa correta foi selecionada 🎉",
     })
   }
-
-  resetAnimation = () => {
-    this.animation.reset();
-    this.animation.play();
-  };
   
   render() {
     return (
@@ -54,6 +51,33 @@ export default class App extends React.Component {
             })
           }}
         />
+        <TouchableOpacity
+        onPress={async ()=>{
+          this.animation.reset();
+          var response = await AsyncStorage.getItem("corrects");
+          if(response == null){
+            await AsyncStorage.setItem("corrects", "1");
+          }else{
+            response = parseInt(response)
+            await AsyncStorage.setItem("corrects", `${response+1}`);
+          }
+          this.props.navigation.navigate("QUIZZ", {
+            semestre: this.props.route.params.semestre,
+            disciplina: this.props.route.params.disciplina,
+            sort: sortQuestion(this.props.route.params.semestre, this.props.route.params.disciplina, this.props.route.params.sort)
+          })
+        }}
+        style={{
+          backgroundColor: "#43D296",
+          height: 50,
+          width: 50,
+          borderRadius: 50,
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+        >
+          <Icon color="white" size={30} name="arrowright"/>
+        </TouchableOpacity>
       </View>
     );
   }
