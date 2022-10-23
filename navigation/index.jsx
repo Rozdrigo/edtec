@@ -1,9 +1,11 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useState } from "react";
 import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
+  Link,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
@@ -20,6 +22,9 @@ import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ImageZoom from "../screens/ImageZoom";
+import { Pressable, Touchable } from "react-native";
+import { Modal } from "react-native-web";
+import SideBar from "../screens/SideBar";
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -31,7 +36,6 @@ export default function Navigation({ colorScheme }) {
     </NavigationContainer>
   );
 }
-
 const Stack = createNativeStackNavigator();
 function RootNavigator() {
   return (
@@ -41,7 +45,17 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
+      <Stack.Group screenOptions={{ presentation: 'transparentModal', animation: 'slide_from_left' }}>
+        <Stack.Screen
+            name="SIDEBAR"
+            component={SideBar}
+            options={{
+              headerShown: false,
+            }}
+            screenOptions={{ headerTintColor: "white", presentation: 'transparentModal' }}
+          />
+      </Stack.Group>
+      <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
           name="CONTEÚDO"
           component={ContentScreen}
@@ -114,6 +128,14 @@ function BottomTabNavigator() {
         name="HOME"
         component={TabOneScreen}
         options={({ navigation }) => ({
+          headerLeft: ({ color })=>
+          <Pressable 
+            onPress={()=>navigation.navigate("SIDEBAR")}
+            style={{
+              marginLeft: 10
+            }}>
+            <TabBarIcon name="bars" color={color}/>
+          </Pressable>,
           title: "HOME",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         })}
