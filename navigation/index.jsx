@@ -25,6 +25,7 @@ import ImageZoom from "../screens/ImageZoom";
 import { Pressable, Touchable } from "react-native";
 import { Modal } from "react-native-web";
 import SideBar from "../screens/SideBar";
+import Tutorial from "../screens/Tutorial";
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -45,6 +46,16 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
+      <Stack.Group screenOptions={{ presentation: 'transparentModal' }}>
+        <Stack.Screen
+            name="TUTORIAL"
+            component={Tutorial}
+            options={{
+              headerShown: false,
+            }}
+            screenOptions={{ headerTintColor: "white", presentation: 'transparentModal' }}
+          />
+      </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'transparentModal', animation: 'slide_from_left' }}>
         <Stack.Screen
             name="SIDEBAR"

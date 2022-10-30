@@ -113,9 +113,12 @@ export default function SideBar({ navigation }) {
   }
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#f4a700" animated></StatusBar>
       <View
         style={{
           height: '100%', width: '60%', backgroundColor: "#FEBD00",
+          borderColor: "#ffffff",
+          borderRightWidth: 3,
           shadowColor: "#000",
           shadowOffset: {
             width: 0,
@@ -146,6 +149,7 @@ export default function SideBar({ navigation }) {
             <Button to="DISCIPLINAS" name="Disciplinas" icon="bookmark"/>
             <Button to="OPÇÕES" name="Quizz" icon="question"/>
             <Button to="MEMORIAL" name="Projeto Social" icon="umbrella"/>
+            <Button to="TUTORIAL" name="Tutorial" icon="plus"/>
           </View>
         </View>
         <View

@@ -21,6 +21,7 @@ import Search from "../components/Search";
 var _width = Dimensions.get("screen").width;
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StatusBar } from "expo-status-bar";
 
 export default function TabOneScreen({ navigation }) {
   const [corrects, setCorrects] = useState(0);
@@ -30,6 +31,9 @@ export default function TabOneScreen({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       (async () => {
+        if(await AsyncStorage.getItem("tutorial") != "true"){
+          navigation.navigate("TUTORIAL");
+        }
         var x = await AsyncStorage.getItem("corrects");
         var y = await AsyncStorage.getItem("errors");
         setCorrects(x != null ? x : 0);
@@ -61,6 +65,7 @@ export default function TabOneScreen({ navigation }) {
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+        <StatusBar backgroundColor="#FEBD00" style="dark-content" animated></StatusBar>
         <Banner />
         <View style={styles.box}>
           <Search navigation={navigation}></Search>
